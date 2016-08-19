@@ -1,0 +1,20 @@
+---
+apache_mods_enabled:
+  - rewrite.load
+  - ssl.load
+apache_mods_disabled: []
+php_memory_limit: "256M"
+php_max_execution_time: "120"
+php_upload_max_filesize: "256M"
+php_packages:
+  - php
+  - php-cli
+  - php-common
+  - php-dev
+  - php-gd
+  - php-xml
+php_xdebug_remote_host: localhost
+php_xdebug_remote_port: "9000"
+nodejs_npm_global_packages:
+  - name: jslint
+  - name: node-sass
