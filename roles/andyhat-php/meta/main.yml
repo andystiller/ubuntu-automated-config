@@ -1,7 +1,6 @@
 galaxy_info:
-  author: your name
-  description: your description
-  company: your company (optional)
+  author: Andy Stiller
+  description: Basic PHP set-up role for Ubuntu
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
@@ -147,7 +146,7 @@ galaxy_info:
   #  - utopic
   #  - vivid
   #  - wily
-  #  - xenial
+    - xenial
   #- name: SLES
   #  versions:
   #  - all

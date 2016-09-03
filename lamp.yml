@@ -13,10 +13,8 @@
     apt: update_cache=yes cache_valid_time=86400
 
   roles:
-  - { role: geerlingguy.mysql }
-  - { role: geerlingguy.apache }
-  - { role: geerlingguy.php }
-  - { role: geerlingguy.php-xdebug }
-  - { role: geerlingguy.php-mysql }
+  - role: andyhat-mysql
+  - role: andyhat-apache
+  - role: andyhat-php
   - { role: geerlingguy.ruby }
   - { role: geerlingguy.nodejs }
