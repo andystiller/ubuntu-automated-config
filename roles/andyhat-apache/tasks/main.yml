@@ -1,0 +1,14 @@
+---
+  tasks:
+  - name: Update apt cache.
+    apt: update_cache=yes cache_valid_time=86400
+
+  - name: Install Apache.
+    apt: "name={{ item }} state=installed"
+    with_items: apache_packages 
+
+  - name: Enable Apache rewrite module.
+    apache2_module: name={{ item }} state=present
+    with_items: apache_modules
+    notify: restart apache
+

@@ -1,0 +1,7 @@
+---
+  apache_packages:
+    - apache2
+    - apache2-utils
+
+  apache_modules:
+    - rewrite

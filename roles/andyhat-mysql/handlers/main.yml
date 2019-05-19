@@ -1,0 +1,4 @@
+---
+# handlers file for andyhat-mysql
+- name: restart webserver
+  service: name=apache2 state=restarted
