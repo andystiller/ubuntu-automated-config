@@ -13,10 +13,54 @@
     apt: update_cache=yes cache_valid_time=86400
 
   roles:
-  - { role: geerlingguy.mysql }
-  - { role: geerlingguy.apache }
-  - { role: geerlingguy.php }
-  - { role: geerlingguy.php-xdebug }
-  - { role: geerlingguy.php-mysql }
-  - { role: geerlingguy.ruby }
-  - { role: geerlingguy.nodejs }
+  # Essential roles.
+  - { role: geerlingguy.firewall }
+  - { role: geerlingguy.git }
+  #- { role: geerlingguy.postfix }
+  - { role: geerlingguy.apache, tags: ['webserver']}
+  - { role: geerlingguy.apache-php-fpm, tags: ['webserver'] }
+  - { role: geerlingguy.php, tags: ['php'] }
+  - { role: geerlingguy.php-pecl, tags: ['php'] }
+  - { role: geerlingguy.composer, tags: ['php'] }
+  - { role: geerlingguy.mysql, tags: ['database'] }
+  - { role: geerlingguy.php-mysql, tags: ['php', 'database'] }
+
+
+  # Conditionally-installed roles.
+  - { role: geerlingguy.drupal-console, tags: ['drupal']}
+  - { role: geerlingguy.drush, tags: ['drupal'] }
+  #- { role: geerlingguy.memcached }
+  #- { role: geerlingguy.php-memcached, tags: ['php'] }
+
+  #- role: geerlingguy.php-tideways
+  #  workspace: "/root/php{{ php_version }}"
+  #  tags: ['php']
+
+  - role: geerlingguy.php-xdebug
+    workspace: "/root/php{{ php_version }}"
+    when: '"xdebug" in installed_extras'
+    tags: ['php', 'xdebug']
+
+  - role: geerlingguy.php-xhprof
+    workspace: "/root/php{{ php_version }}"
+    when: '"xhprof" in installed_extras'
+    tags: ['php']
+
+  - role: thom8.php-upload-progress
+    workspace: "/root/php{{ php_version }}"
+    when: '"upload-progress" in installed_extras'
+    tags: ['php']
+
+  #- { role: geerlingguy.blackfire, when: '"blackfire" in installed_extras' }
+  - { role: geerlingguy.adminer, when: '"adminer" in installed_extras', tags: ['database'] }
+  - { role: geerlingguy.pimpmylog, when: '"pimpmylog" in installed_extras' }
+  - { role: geerlingguy.mailhog, when: '"mailhog" in installed_extras' }
+  - { role: geerlingguy.nodejs, when: '"nodejs" in installed_extras' }
+  - { role: geerlingguy.redis, when: '"redis" in installed_extras' }
+  - { role: geerlingguy.php-redis, when: '"redis" in installed_extras', tags: ['php'] }
+  - { role: geerlingguy.ruby, when: '"ruby" in installed_extras' }
+  #- { role: geerlingguy.elasticsearch, when: '"elasticsearch" in installed_extras' }
+  - { role: geerlingguy.varnish, when: '"varnish" in installed_extras' }
+
+  # Roles for security and stability on production.
+  - { role: geerlingguy.security, when: extra_security_enabled }
