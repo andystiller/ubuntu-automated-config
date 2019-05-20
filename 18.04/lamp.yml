@@ -38,29 +38,26 @@
 
   - role: geerlingguy.php-xdebug
     workspace: "/root/php{{ php_version }}"
-    when: '"xdebug" in installed_extras'
     tags: ['php', 'xdebug']
 
   - role: geerlingguy.php-xhprof
     workspace: "/root/php{{ php_version }}"
-    when: '"xhprof" in installed_extras'
     tags: ['php']
 
   - role: thom8.php-upload-progress
     workspace: "/root/php{{ php_version }}"
-    when: '"upload-progress" in installed_extras'
     tags: ['php']
 
-  #- { role: geerlingguy.blackfire, when: '"blackfire" in installed_extras' }
-  - { role: geerlingguy.adminer, when: '"adminer" in installed_extras', tags: ['database'] }
-  - { role: geerlingguy.pimpmylog, when: '"pimpmylog" in installed_extras' }
-  - { role: geerlingguy.mailhog, when: '"mailhog" in installed_extras' }
-  - { role: geerlingguy.nodejs, when: '"nodejs" in installed_extras' }
-  - { role: geerlingguy.redis, when: '"redis" in installed_extras' }
-  - { role: geerlingguy.php-redis, when: '"redis" in installed_extras', tags: ['php'] }
-  - { role: geerlingguy.ruby, when: '"ruby" in installed_extras' }
-  #- { role: geerlingguy.elasticsearch, when: '"elasticsearch" in installed_extras' }
-  - { role: geerlingguy.varnish, when: '"varnish" in installed_extras' }
+  #- { role: geerlingguy.blackfire }
+  - { role: geerlingguy.adminer, tags: ['database'] }
+  - { role: geerlingguy.pimpmylog }
+  #- { role: geerlingguy.mailhog }
+  - { role: geerlingguy.nodejs }
+  - { role: geerlingguy.ruby }
+  #- { role: geerlingguy.redis }
+  #- { role: geerlingguy.php-redis, tags: ['php'] }
+  #- { role: geerlingguy.elasticsearch }
+  #- { role: geerlingguy.varnish }
 
   # Roles for security and stability on production.
-  - { role: geerlingguy.security, when: extra_security_enabled }
+  #- { role: geerlingguy.security }
