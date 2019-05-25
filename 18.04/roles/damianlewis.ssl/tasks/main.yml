@@ -1,0 +1,15 @@
+---
+# Variable configuration.
+- include_tasks: variables.yml
+
+# Install OpenSSL
+- include_tasks: install-openssl.yml
+
+# Generate private keys
+- include_tasks: generate-private-key.yml
+
+# Generate CSR files
+- include_tasks: generate-csr.yml
+
+# Generate certificates
+- include_tasks: generate-certificate.yml

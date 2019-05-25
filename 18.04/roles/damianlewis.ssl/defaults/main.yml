@@ -1,0 +1,4 @@
+---
+ssl_generate_full_chain_certificate: false
+
+ssl_certificates: []

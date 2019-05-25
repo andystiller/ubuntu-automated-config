@@ -1,0 +1,21 @@
+---
+- name: Define ssl_private_key_path
+  set_fact:
+    ssl_private_key_path: "{{ __ssl_private_key_path }}"
+  when: ssl_private_key_path is not defined
+
+- name: Define ssl_certificate_signing_request_path
+  set_fact:
+    ssl_certificate_signing_request_path: "{{ __ssl_certificate_signing_request_path }}"
+  when: ssl_certificate_signing_request_path is not defined
+
+- name: Define ssl_certificate_path
+  set_fact:
+    ssl_certificate_path: "{{ __ssl_certificate_path }}"
+  when: ssl_certificate_path is not defined
+
+
+- name: Define ssl_private_key_size
+  set_fact:
+    ssl_private_key_size: "{{ __ssl_private_key_size }}"
+  when: ssl_private_key_size is not defined

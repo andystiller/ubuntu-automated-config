@@ -1,0 +1,18 @@
+---
+- name: Create folder for private keys
+  file:
+    path: "{{ ssl_private_key_path }}"
+    owner: root
+    group: root
+    mode: 0700
+    state: directory
+
+- name: Generate OpenSSL RSA private key
+  command: >
+    openssl genrsa
+    -out {{ ssl_private_key_path }}/{{ item.common_name }}.key {{ ssl_private_key_size }}
+  args:
+    creates: "{{ ssl_private_key_path }}/{{ item.common_name }}.key"
+  register: ssl_private_keys_generated
+  changed_when: ssl_private_keys_generated.changed
+  loop: "{{ ssl_certificates }}"

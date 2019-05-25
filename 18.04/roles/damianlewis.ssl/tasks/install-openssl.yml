@@ -1,0 +1,12 @@
+---
+- name: Check if OpenSSL is already installed
+  stat:
+    path: "{{ ssl_openssl_path }}"
+  register: ssl_openssl_installed
+
+- name: Ensure OpenSSL is installed
+  apt:
+    name: "{{ ssl_openssl_package }}"
+    update_cache: yes
+    cache_valid_time: 86400
+  when: not ssl_openssl_installed.stat.exists

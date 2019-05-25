@@ -1,0 +1,27 @@
+---
+- name: Create folder for CSR files
+  file:
+    path: "{{ ssl_certificate_signing_request_path }}"
+    owner: root
+    group: root
+    mode: 0755
+    state: directory
+
+- name: Generate CSR config file
+  template:
+    src: templates/ssl.conf.j2
+    dest: "{{ ssl_certificate_signing_request_path }}/{{ item.common_name }}.conf"
+  loop: "{{ ssl_certificates }}"
+
+- name: Generate OpenSSL CSR file
+  command: >
+    openssl req
+    -new -sha256
+    -config {{ ssl_certificate_signing_request_path }}/{{ item.common_name }}.conf
+    -key {{ ssl_private_key_path }}/{{ item.common_name }}.key
+    -out {{ ssl_certificate_signing_request_path }}/{{ item.common_name }}.csr
+  args:
+    creates: "{{ ssl_certificate_signing_request_path }}/{{ item.common_name }}.csr"
+  register: ssl_csr_files_generated
+  changed_when: ssl_csr_files_generated.changed
+  loop: "{{ ssl_certificates }}"

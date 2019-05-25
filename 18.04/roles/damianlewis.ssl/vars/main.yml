@@ -1,0 +1,9 @@
+---
+ssl_openssl_path: /usr/bin/openssl
+ssl_openssl_package: openssl
+
+__ssl_private_key_path: /etc/ssl/private
+__ssl_certificate_signing_request_path: /etc/ssl/csr
+__ssl_certificate_path: /etc/ssl/self-signed-certs
+
+__ssl_private_key_size: '2048'
