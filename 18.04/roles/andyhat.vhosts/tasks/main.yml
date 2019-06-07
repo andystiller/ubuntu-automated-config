@@ -2,6 +2,8 @@
 - name: Update apt cache.
   apt: update_cache=yes cache_valid_time=3600
 
+- include_vars: Debian.yml
+
 - name: Ensure Apache is installed on Debian.
   apt: "name={{ apache_packages }} state={{ apache_packages_state }}"
 
@@ -13,15 +15,18 @@
 - name: Add apache vhosts configuration.
   template:
     src: "{{ apache_vhosts_template }}"
-    dest: "{{ apache_conf_path }}/sites-available/{{ apache_vhosts_filename }}"
+    dest: "{{ apache_conf_path }}/sites-available/{{ item.filename }}"
     owner: root
     group: root
     mode: 0644
+  with_items: "{{ apache_vhosts }}"
   notify: restart apache
 
 - name: Add vhost symlink in sites-enabled.
   file:
-    src: "{{ apache_conf_path }}/sites-available/{{ apache_vhosts_filename }}"
-    dest: "{{ apache_conf_path }}/sites-enabled/{{ apache_vhosts_filename }}"
+    src: "{{ apache_conf_path }}/sites-available/{{ item.filename }}"
+    dest: "{{ apache_conf_path }}/sites-enabled/{{ item.filename }}"
     state: link
+  when: item.enabled == true
+  with_items: "{{ apache_vhosts }}"
   notify: restart apache
