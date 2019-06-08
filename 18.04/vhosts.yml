@@ -10,5 +10,5 @@
 
   roles:
   # Essential roles.
-  #- { role: damianlewis.ssl }
+  - { role: damianlewis.ssl }
   - { role: andyhat.vhosts }
