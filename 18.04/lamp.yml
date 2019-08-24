@@ -28,7 +28,7 @@
 
   # Conditionally-installed roles.
   - { role: geerlingguy.drupal-console, tags: ['drupal']}
-  - { role: geerlingguy.drush, tags: ['drupal'] }
+  #- { role: geerlingguy.drush, tags: ['drupal'] }
   #- { role: geerlingguy.memcached }
   #- { role: geerlingguy.php-memcached, tags: ['php'] }
 
