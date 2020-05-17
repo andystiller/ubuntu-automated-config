@@ -1,0 +1,38 @@
+---
+- name: Create folder for self-signed certificate
+  file:
+    path: "{{ ssl_certificate_path }}"
+    owner: root
+    group: root
+    mode: 0755
+    state: directory
+
+- name: Generate self-signed OpenSSL certificate
+  command: >
+    openssl req
+    -nodes -x509 -sha256
+    -extensions v3
+    -days {{ item.days | default('365') }}
+    -config {{ ssl_certificate_signing_request_path }}/{{ item.common_name }}.conf
+    -in {{ ssl_certificate_signing_request_path }}/{{ item.common_name }}.csr
+    -key {{ ssl_private_key_path }}/{{ item.common_name }}.key
+    -out {{ ssl_certificate_path }}/{{ item.common_name }}.crt
+  args:
+    creates: "{{ ssl_certificate_path }}/{{ item.common_name }}.crt"
+  register: ssl_certificates_generated
+  changed_when: ssl_certificates_generated.changed
+  loop: "{{ ssl_certificates }}"
+
+- name: Combine files into a full chain (PEM) certificate
+  shell: >
+    cat
+    {{ ssl_certificate_path }}/{{ item.common_name }}.crt
+    {{ ssl_private_key_path }}/{{ item.common_name }}.key
+    >
+    {{ ssl_certificate_path }}/{{ item.common_name }}.pem
+  args:
+    creates: "{{ ssl_certificate_path }}/{{ item.common_name }}.pem"
+  register: ssl_full_chain_certificates_generated
+  changed_when: ssl_full_chain_certificates_generated.changed
+  when: ssl_generate_full_chain_certificate
+  loop: "{{ ssl_certificates }}"

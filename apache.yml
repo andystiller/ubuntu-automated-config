@@ -1,0 +1,17 @@
+---
+- hosts: me
+  sudo: yes
+  tasks:
+  - name: Update apt cache.
+    apt: update_cache=yes cache_valid_time=86400
+
+  - name: Ensure Apache is installed.
+    apt: "name={{ item }} state=installed"
+    with_items: 
+      - apache2
+      - apache2-utils
+
+  - name: Enable Apache rewrite module.
+    apache2_module: name=rewrite state=present
+    notify: restart apache
+

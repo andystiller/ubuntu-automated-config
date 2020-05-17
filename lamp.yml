@@ -1,0 +1,20 @@
+---
+- hosts: me
+  vars_files:
+  - vars/main.yml
+  - vars/personal.yml
+  vars:
+  - ansible_become_pass: "{{ sudopassword }}"
+  become: true
+  become_method: sudo
+
+  tasks:
+  - name: Update apt cache.
+    apt: update_cache=yes cache_valid_time=86400
+
+  roles:
+  - role: andyhat-mysql
+  - role: andyhat-apache
+  - role: andyhat-php
+  - { role: geerlingguy.ruby }
+  - { role: geerlingguy.nodejs }

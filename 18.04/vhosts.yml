@@ -1,0 +1,14 @@
+---
+- hosts: me
+  vars_files:
+  - vars/sites.yml
+  - vars/personal.yml
+  vars:
+  - ansible_become_pass: "{{ sudopassword }}"
+  become: true
+  become_method: sudo
+
+  roles:
+  # Essential roles.
+  - { role: damianlewis.ssl }
+  - { role: andyhat.vhosts }

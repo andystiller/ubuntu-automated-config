@@ -1,0 +1,27 @@
+[req]
+prompt = no
+default_bits = {{ ssl_private_key_size }}
+default_keyfile = {{ ssl_private_key_path }}/{{ item.common_name }}.key
+distinguished_name = subject
+
+[subject]
+countryName = {{ item.country | default('GB') }}
+stateOrProvinceName = {{ item.state_province | default('Hertfordshire') }}
+localityName = {{ item.locality | default('St Albans') }}
+organizationName = {{ item.organization | default('Your Company') }}
+commonName = {{ item.common_name }}
+{% if item.email is defined %}
+emailAddress = {{ item.email }}
+{% endif %}
+
+[v3]
+authorityKeyIdentifier = keyid, issuer
+basicConstraints = CA:FALSE
+keyUsage = digitalSignature, keyEncipherment
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = {{ item.common_name }}
+{% if item.san_name is defined %}
+DNS.2 = {{ item.san_name }}
+{% endif %}
