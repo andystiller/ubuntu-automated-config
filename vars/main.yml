@@ -1,7 +1,8 @@
 ---
 php_memory_limit: "512M"
 php_max_execution_time: "120"
-php_upload_max_filesize: "256M"
+php_upload_max_filesize: "64M"
+php_version: '7.2'
 php_packages:
   - php
   - php-cli
@@ -9,8 +10,13 @@ php_packages:
   - php-dev
   - php-gd
   - php-xml
+  - php-mbstring
+  - php-curl
+  - php-zip
 php_xdebug_remote_host: localhost
 php_xdebug_remote_port: "9000"
 nodejs_npm_global_packages:
   - name: jslint
-  - name: node-sass
+  #- name: node-sass
+
+php_mysql_package: php7.2-mysql

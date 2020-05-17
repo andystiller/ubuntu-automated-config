@@ -1,0 +1,81 @@
+---
+apache_listen_ip: "127.0.0.1"
+apache_vhosts:
+  # Additional optional properties: 'serveradmin, serveralias, extra_parameters'.
+  - servername: "andyhat-co.dev.local"
+    filename: "andyhat-co.dev.conf"
+    documentroot: "/var/www/sites/andyhat-co.dev.local"
+    enabled: true
+    ssl: true
+    certificate_file: "/etc/ssl/self-signed-certs/dev.local.crt"
+    certificate_key_file: "/etc/ssl/private/dev.local.key"
+    extra_parameters: |
+      RewriteCond %{HTTP_HOST} !^www\. [NC]
+      RewriteRule ^(.*)$ http://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+  - servername: "andyhat-org.dev.local"
+    filename: "andyhat-org.dev.conf"
+    documentroot: "/var/www/sites/andyhat-org.dev.local"
+    enabled: true
+    ssl: true
+    certificate_file: "/etc/ssl/self-signed-certs/dev.local.crt"
+    certificate_key_file: "/etc/ssl/private/dev.local.key"
+    extra_parameters: |
+      RewriteCond %{HTTP_HOST} !^www\. [NC]
+      RewriteRule ^(.*)$ http://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+  - servername: "disability.dev.local"
+    filename: "disability.dev.conf"
+    documentroot: "/var/www/sites/disability.dev.local"
+    enabled: true
+    ssl: true
+    certificate_file: "/etc/ssl/self-signed-certs/dev.local.crt"
+    certificate_key_file: "/etc/ssl/private/dev.local.key"
+    extra_parameters: |
+      RewriteCond %{HTTP_HOST} !^www\. [NC]
+      RewriteRule ^(.*)$ http://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+  - servername: "photographyonwheels.dev.local"
+    filename: "photographyonwheels.dev.conf"
+    documentroot: "/var/www/sites/photographyonwheels.dev.local"
+    enabled: true
+    ssl: true
+    certificate_file: "/etc/ssl/self-signed-certs/dev.local.crt"
+    certificate_key_file: "/etc/ssl/private/dev.local.key"
+    extra_parameters: |
+      RewriteCond %{HTTP_HOST} !^www\. [NC]
+      RewriteRule ^(.*)$ http://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+  - servername: "bb-drupal-dashboard.dev.local"
+    filename: "bb-drupal-dashboard.dev.conf"
+    documentroot: "/var/www/sites/bb-drupal-dashboard.dev.local/htdocs/web"
+    enabled: true
+    ssl: true
+    certificate_file: "/etc/ssl/self-signed-certs/dev.local.crt"
+    certificate_key_file: "/etc/ssl/private/dev.local.key"
+    extra_parameters: |
+      RewriteCond %{HTTP_HOST} !^www\. [NC]
+      RewriteRule ^(.*)$ http://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+  - servername: "bluebag.dev.local"
+    filename: "bluebag.dev.conf"
+    documentroot: "/var/www/sites/bluebag/htdocs"
+    enabled: true
+    ssl: true
+    certificate_file: "/etc/ssl/self-signed-certs/dev.local.crt"
+    certificate_key_file: "/etc/ssl/private/dev.local.key"
+    extra_parameters: |
+      RewriteCond %{HTTP_HOST} !^www\. [NC]
+      RewriteRule ^(.*)$ http://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+      
+# apache_vhosts_ssl:
+#   - servername: "andyhat.dev.local"
+#     documentroot: "/var/www/sites"
+#     certificate_file: "/etc/ssl/self-signed-certs/devl.local.crt"
+#     certificate_key_file: "/etc/ssl/private/devl.local.key"
+#     extra_parameters: |
+#       RewriteCond %{HTTP_HOST} !^www\. [NC]
+#       RewriteRule ^(.*)$ http://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+ssl_generate_full_chain_certificate: true
+ssl_certificates:
+- common_name: dev.local
+  country: GB
+  state_province: Sussex
+  locality: Burgess Hill
+  organization: Andyhat
