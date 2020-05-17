@@ -15,8 +15,6 @@
   roles:
   # Essential roles.
   - { role: geerlingguy.firewall }
-  - { role: geerlingguy.git }
-  #- { role: geerlingguy.postfix }
   - { role: geerlingguy.apache, tags: ['webserver']}
   - { role: geerlingguy.apache-php-fpm, tags: ['webserver'] }
   - { role: geerlingguy.php, tags: ['php'] }
@@ -29,10 +27,6 @@
   # Conditionally-installed roles.
   - { role: geerlingguy.drupal-console, tags: ['drupal']}
   #- { role: geerlingguy.drush, tags: ['drupal'] }
-  #- { role: geerlingguy.memcached }
-  #- { role: geerlingguy.php-memcached, tags: ['php'] }
-
-  #- role: geerlingguy.php-tideways
   
   #  tags: ['php']
 
@@ -45,16 +39,8 @@
   - role: thom8.php-upload-progress
     tags: ['php']
 
-  #- { role: geerlingguy.blackfire }
   - { role: geerlingguy.adminer, tags: ['database'] }
   - { role: geerlingguy.pimpmylog }
   #- { role: geerlingguy.mailhog }
   - { role: geerlingguy.nodejs }
   - { role: geerlingguy.ruby }
-  #- { role: geerlingguy.redis }
-  #- { role: geerlingguy.php-redis, tags: ['php'] }
-  #- { role: geerlingguy.elasticsearch }
-  #- { role: geerlingguy.varnish }
-
-  # Roles for security and stability on production.
-  #- { role: geerlingguy.security }
