@@ -26,21 +26,14 @@
 
   # Conditionally-installed roles.
   - { role: geerlingguy.drupal-console, tags: ['drupal']}
-  #- { role: geerlingguy.drush, tags: ['drupal'] }
   
   #  tags: ['php']
-
   - role: geerlingguy.php-xdebug
     tags: ['php', 'xdebug']
-
-  - role: geerlingguy.php-xhprof
-    tags: ['php']
-
   - role: thom8.php-upload-progress
     tags: ['php']
 
   - { role: geerlingguy.adminer, tags: ['database'] }
   - { role: geerlingguy.pimpmylog }
-  #- { role: geerlingguy.mailhog }
   - { role: geerlingguy.nodejs }
   - { role: geerlingguy.ruby }
