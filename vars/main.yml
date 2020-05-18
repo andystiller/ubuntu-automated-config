@@ -2,7 +2,7 @@
 php_memory_limit: "512M"
 php_max_execution_time: "120"
 php_upload_max_filesize: "64M"
-php_version: '7.2'
+php_version: '7.4'
 php_packages:
   - php
   - php-cli
@@ -19,4 +19,6 @@ nodejs_npm_global_packages:
   - name: jslint
   #- name: node-sass
 
-php_mysql_package: php7.2-mysql
+php_mysql_package: 
+  - php-mysql
+mysql_python_package_debian: 'python3-mysqldb'
